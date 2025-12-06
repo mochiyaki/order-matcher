@@ -25,8 +25,6 @@ For detailed implementation roadmap, see [PLAN.md](PLAN.md).
 
 ## Getting Started
 
-(This section will be updated as development progresses)
-
 ### Prerequisites
 
 - Node.js (v16 or higher)
@@ -36,16 +34,75 @@ For detailed implementation roadmap, see [PLAN.md](PLAN.md).
 ### Installation
 
 1. Clone the repository
-2. Install dependencies
-3. Configure environment variables
-4. Run the application
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment variables by copying `.env.example` to `.env` and updating values
+4. Start the application:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-git clone https://github.com/mochiyaki/order-matcher.git
-cd order-matcher
-npm install
-npm start
+## Project Structure
+
 ```
+.
+├── models/           # Database schemas
+├── routes/           # API endpoints
+├── services/         # Business logic and algorithms
+├── tests/            # Unit and integration tests
+├── .env              # Environment variables
+├── server.js         # Main application file
+└── package.json      # Dependencies and scripts
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login with email and password
+- `GET /api/auth/profile` - Get current user profile
+
+### Orders
+- `GET /api/orders` - Get all orders
+- `GET /api/orders/:id` - Get specific order
+- `POST /api/orders` - Create new order
+- `PUT /api/orders/:id/status` - Update order status
+- `PUT /api/orders/:id/assign-driver` - Assign driver to order
+- `PUT /api/orders/:id/location` - Update delivery location
+
+### Drivers
+- `GET /api/drivers` - Get all drivers
+- `GET /api/drivers/:id` - Get specific driver
+- `PUT /api/drivers/:id/location` - Update driver location
+- `PUT /api/drivers/:id/status` - Update driver status
+- `GET /api/drivers/available` - Get available drivers near location
+
+### Admin
+- `GET /api/admin/orders` - Get all orders (admin)
+- `GET /api/admin/drivers` - Get all drivers (admin)
+- `POST /api/admin/assign-driver` - Assign order to driver (admin)
+- `GET /api/admin/stats` - Get system statistics (admin)
+
+### Matching
+- `POST /api/matching/orders/:orderId/best-driver` - Find best driver for an order
+- `POST /api/matching/orders/batch-assign` - Batch assign orders to drivers
+- `POST /api/matching/orders/:orderId/reassign` - Reassign order to different driver
+
+## Technologies Used
+
+### Backend
+- Node.js with Express.js
+- MongoDB with Mongoose
+- Socket.IO for real-time communication
+- JWT for authentication
+- bcryptjs for password hashing
+
+### Development Tools
+- Nodemon for development
+- Jest for testing
+- Supertest for API testing
 
 ## Contributing
 
